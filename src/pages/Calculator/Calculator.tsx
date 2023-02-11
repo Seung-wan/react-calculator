@@ -37,7 +37,11 @@ const Calculator = () => {
       <div className="operators subgrid">
         {Object.values(OPERATORS).map((operator) => {
           return (
-            <CalculatorButton key={operator} disabled={result === ERROR_RESULT} onClick={onClickOperator(operator)}>
+            <CalculatorButton
+              key={operator}
+              disabled={result === ERROR_RESULT}
+              onClick={() => onClickOperator(operator)}
+            >
               {operator}
             </CalculatorButton>
           );

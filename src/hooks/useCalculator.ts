@@ -12,8 +12,6 @@ const initialCalculatorState: CalculatorState = {
 const useCalculator = () => {
   const [calculatorState, setCalculatorState] = useState<CalculatorState>(initialCalculatorState);
 
-  console.log(calculatorState);
-
   const clickOperand = (operand: number) => () => {
     try {
       if (calculatorState.operand === null) {
@@ -31,7 +29,7 @@ const useCalculator = () => {
     }
   };
 
-  const clickOperator = (operator: Operator) => () => {
+  const clickOperator = (operator: Operator) => {
     const states = [calculatorState.result, calculatorState.operand, calculatorState.operator];
     if (states.every((state) => state !== null)) {
       setCalculatorState({
