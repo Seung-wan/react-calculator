@@ -1,4 +1,4 @@
-export type Operator = '+' | '-' | 'X' | '/' | '=' | null;
+export type Operator = '+' | '-' | 'X' | '/' | '=';
 export type Modifier = 'AC';
 
 export type CalculatorState = {
