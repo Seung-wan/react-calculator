@@ -1,14 +1,10 @@
 import { ButtonHTMLAttributes, PropsWithChildren } from 'react';
-import { ERROR_RESULT } from '../../constants/calculator';
 
-type Props = {
-  type?: 'button' | 'submit' | 'reset';
-  result?: number;
-} & ButtonHTMLAttributes<HTMLButtonElement>;
+type Props = ButtonHTMLAttributes<HTMLButtonElement>;
 
-const CalculatorButton = ({ type = 'button', result, className, children, ...props }: PropsWithChildren<Props>) => {
+const CalculatorButton = ({ type = 'button', className, children, ...props }: PropsWithChildren<Props>) => {
   return (
-    <button {...props} type={type} disabled={result === ERROR_RESULT} className={className}>
+    <button {...props} type={type} className={className}>
       {children}
     </button>
   );

@@ -1,5 +1,5 @@
 import { CalculatorButton, ResultScreen } from '../../components/Calculator';
-import { DIGIT_MAX_NUMBER, MODIFIERS, OPERATORS } from '../../constants/calculator';
+import { DIGIT_MAX_NUMBER, ERROR_RESULT, MODIFIERS, OPERATORS } from '../../constants/calculator';
 import useCalculator from '../../hooks/useCalculator';
 
 const DIGIT_NUMBERS = Array.from({ length: DIGIT_MAX_NUMBER + 1 }, (_, index) => DIGIT_MAX_NUMBER - index);
@@ -19,7 +19,7 @@ const Calculator = () => {
       <div className="digits flex">
         {DIGIT_NUMBERS.map((number) => {
           return (
-            <CalculatorButton key={number} result={result} onClick={onClickOperand(number)}>
+            <CalculatorButton key={number} disabled={result === ERROR_RESULT} onClick={onClickOperand(number)}>
               {number}
             </CalculatorButton>
           );
@@ -37,7 +37,7 @@ const Calculator = () => {
       <div className="operators subgrid">
         {Object.values(OPERATORS).map((operator) => {
           return (
-            <CalculatorButton key={operator} result={result} onClick={onClickOperator(operator)}>
+            <CalculatorButton key={operator} disabled={result === ERROR_RESULT} onClick={onClickOperator(operator)}>
               {operator}
             </CalculatorButton>
           );
