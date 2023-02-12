@@ -19,7 +19,12 @@ const Calculator = () => {
       <div className="digits flex">
         {DIGIT_NUMBERS.map((number) => {
           return (
-            <CalculatorButton key={number} disabled={result === ERROR_RESULT} onClick={onClickOperand(number)}>
+            <CalculatorButton
+              key={number}
+              disabled={result === ERROR_RESULT}
+              onClick={onClickOperand}
+              data-number={number}
+            >
               {number}
             </CalculatorButton>
           );
@@ -40,7 +45,8 @@ const Calculator = () => {
             <CalculatorButton
               key={operator}
               disabled={result === ERROR_RESULT}
-              onClick={() => onClickOperator(operator)}
+              onClick={onClickOperator}
+              data-operator={operator}
             >
               {operator}
             </CalculatorButton>

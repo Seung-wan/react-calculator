@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { MouseEvent, useState } from 'react';
 import { calculate, validateOperand } from '../domain/calculator';
 
 import type { CalculatorState, Operator } from '../types/calculator';
@@ -12,14 +12,17 @@ const initialCalculatorState: CalculatorState = {
 const useCalculator = () => {
   const [calculatorState, setCalculatorState] = useState<CalculatorState>(initialCalculatorState);
 
-  const clickOperand = (operand: number) => () => {
+  const clickOperand = (e: MouseEvent<HTMLButtonElement>) => {
+    const { number } = e.currentTarget.dataset;
+    if (!number) return;
+
     try {
       if (calculatorState.operand === null) {
-        setCalculatorState((prev) => ({ ...prev, operand }));
+        setCalculatorState((prev) => ({ ...prev, operand: Number(number) }));
         return;
       }
 
-      const concatOperand = String(calculatorState.operand) + String(operand);
+      const concatOperand = String(calculatorState.operand) + number;
 
       validateOperand(Number(concatOperand));
 
@@ -29,13 +32,16 @@ const useCalculator = () => {
     }
   };
 
-  const clickOperator = (operator: Operator) => {
+  const clickOperator = (e: MouseEvent<HTMLButtonElement>) => {
+    const { operator } = e.currentTarget.dataset;
+    if (!operator) return;
+
     const states = [calculatorState.result, calculatorState.operand, calculatorState.operator];
     if (states.every((state) => state !== null)) {
       setCalculatorState({
         result: calculate(calculatorState),
         operand: null,
-        operator,
+        operator: operator as Operator,
       });
       return;
     }
@@ -43,7 +49,7 @@ const useCalculator = () => {
     setCalculatorState({
       result: calculatorState.operand ?? calculatorState.result,
       operand: null,
-      operator,
+      operator: operator as Operator,
     });
   };
 
